@@ -1,13 +1,21 @@
 // App.js
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import YourBotArmy from './YourBotArmy';
 
 function App() {
   const [Bots, setBots] = useState([]);
-  comst []
+  const [addBot,setAddBot] = useState([])
 
-  function handleBotAdd() {
+  function handleBotAdd(bot) {
+     const findBot = addBot.find(Bot => Bot.id === bot.id)
+     if(!findBot) {
+      setAddBot([...addBot,bot])
+     }
+   }
   
+   function handleRealese(bot) {
+      setAddBot((addBot) =>  addBot.filter(armybot => armybot.id !== bot.id ))
    }
 
   useEffect(() => {
@@ -23,9 +31,11 @@ function App() {
    
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '60px' }}>
+  <div>
+    <YourBotArmy addBot={addBot} onRealese={handleRealese}/>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '52px' }}>
       {Bots.map(bot => (
-        <div key={bot.id} className="bot-card" onClick={handleBotAdd}>
+        <div key={bot.id} className="bot-card" onClick={() => handleBotAdd(bot)}>
           <img src={bot.avatar_url} alt={bot.name} />
           <li>{bot.name}</li>
           <p>Health: {bot.health}</p>
@@ -36,7 +46,9 @@ function App() {
 
         </div>
       ))}
-    </div>
+   </div>
+      
+  </div>
   );
 }
 

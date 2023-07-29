@@ -34,3 +34,12 @@
    font-size: 8.6px;
    font-weight: 50px;
 }
+.centered-heading {
+  text-align: center;
+}
+.botArmy {
+  background-color: aliceblue;
+  width: 100%; /* Make the container take the full width of the viewport */
+  padding: 20px; /* Add some padding for spacing */
+  box-sizing: border-box; 
+}
