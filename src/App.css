@@ -39,7 +39,18 @@
 }
 .botArmy {
   background-color: aliceblue;
-  width: 100%; /* Make the container take the full width of the viewport */
-  padding: 20px; /* Add some padding for spacing */
+  width: 100%; 
+  padding: 20px; 
   box-sizing: border-box; 
+
 }
+#realese {
+  background-color: green;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 6px 7px;
+  border-radius: 5px;
+}
+
+

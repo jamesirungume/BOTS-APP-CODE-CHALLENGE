@@ -7,17 +7,6 @@ function App() {
   const [Bots, setBots] = useState([]);
   const [addBot,setAddBot] = useState([])
 
-  function handleBotAdd(bot) {
-     const findBot = addBot.find(Bot => Bot.id === bot.id)
-     if(!findBot) {
-      setAddBot([...addBot,bot])
-     }
-   }
-  
-   function handleRealese(bot) {
-      setAddBot((addBot) =>  addBot.filter(armybot => armybot.id !== bot.id ))
-   }
-
   useEffect(() => {
     fetch("http://localhost:3000/bots")
       .then(resp => resp.json())
@@ -30,9 +19,29 @@ function App() {
   }, []);
    
 
+  function handleBotAdd(bot) {
+     const findBot = addBot.find(Bot => Bot.id === bot.id)
+     if(!findBot) {
+      setAddBot([...addBot,bot])
+     }
+   }
+  
+   function handleRealese(bot) {
+      setAddBot((addBot) =>  addBot.filter(armybot => armybot.id !== bot.id ))
+   }
+   function handleDelete(bot) {
+  
+    fetch (`http://localhost:3000/bots/${bot.id}`, {
+      method: "DELETE"
+    })
+    .then(data => {
+      setAddBot((addBot) =>  addBot.filter(armybot => armybot.id !== bot.id ))
+    })
+   }
+
   return (
   <div>
-    <YourBotArmy addBot={addBot} onRealese={handleRealese}/>
+    <YourBotArmy addBot={addBot} onRealese={handleRealese} onDelete={handleDelete}/>
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '52px' }}>
       {Bots.map(bot => (
         <div key={bot.id} className="bot-card" onClick={() => handleBotAdd(bot)}>

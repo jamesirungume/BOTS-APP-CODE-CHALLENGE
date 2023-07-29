@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
 
-function YourBotArmy({addBot,onRealese}) {
+function YourBotArmy({ addBot,onRealese,onDelete }) {
     function handleRelease(bot) {
         onRealese(bot)
     }
-function handleDelete(bot) {
-  onD
+    function handleDelete(bot) {
+    onDelete(bot)
 } 
-
 
 return (
  <div className="botArmy" >
@@ -23,8 +22,19 @@ return (
           <p>Armor: {bot.armor}</p>
           <p>Class: {bot.bot_class}</p>
           <div className="catchphrase-data">{bot.catchphrase}</div>
-          <button onClick={() => handleRelease(bot)}>Release</button>
-          <button onClick={() => handleDelete(bot)}>X</button>
+          <button
+              id="realese"
+              onClick={() => handleRelease(bot)}
+              
+            >
+              Release
+            </button>
+            <button
+              onClick={() => handleDelete(bot)}
+              style={{ backgroundColor: 'red', color: 'white', cursor: 'pointer', marginTop: "5px", padding:"4px 9px", borderRadius:"4px" }}
+            >
+              X
+            </button>
     </div>
         ))}
     </div>
