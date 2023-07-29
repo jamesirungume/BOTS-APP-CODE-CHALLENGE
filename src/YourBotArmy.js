@@ -23,7 +23,7 @@ return (
           <p>Class: {bot.bot_class}</p>
           <div className="catchphrase-data">{bot.catchphrase}</div>
           <button
-              id="realese"
+              className="realese"
               onClick={() => handleRelease(bot)}
               
             >

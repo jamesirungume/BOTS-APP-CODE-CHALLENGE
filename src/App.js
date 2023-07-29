@@ -1,4 +1,4 @@
-// App.js
+
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import YourBotArmy from './YourBotArmy';
@@ -33,6 +33,7 @@ function App() {
      const findBot = addBot.find(Bot => Bot.id === bot.id)
      if(!findBot) {
       setAddBot([...addBot,bot])
+      setViewSpecs(null); 
      }
    }
   
