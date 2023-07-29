@@ -2,10 +2,12 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import YourBotArmy from './YourBotArmy';
+import BotDetails from './BotDetails';
 
 function App() {
   const [Bots, setBots] = useState([]);
   const [addBot,setAddBot] = useState([])
+  const [viewSpecs,setViewSpecs] = useState(null)
 
   useEffect(() => {
     fetch("http://localhost:3000/bots")
@@ -17,7 +19,15 @@ function App() {
         console.error('Error fetching data:', error);
       });
   }, []);
+
+  function handleGoBack() {
+   setViewSpecs(null)
+  }
    
+
+  function handleViewDetails(bot) {
+    setViewSpecs(bot)
+  }
 
   function handleBotAdd(bot) {
      const findBot = addBot.find(Bot => Bot.id === bot.id)
@@ -41,10 +51,13 @@ function App() {
 
   return (
   <div>
-    <YourBotArmy addBot={addBot} onRealese={handleRealese} onDelete={handleDelete}/>
+    {viewSpecs ? 
+     (<BotDetails viewSpecs={viewSpecs} onEnlistBot={handleBotAdd} onGoBackToList={handleGoBack}/>):
+    (<YourBotArmy addBot={addBot} onRealese={handleRealese} onDelete={handleDelete}/>)  
+}
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '52px' }}>
       {Bots.map(bot => (
-        <div key={bot.id} className="bot-card" onClick={() => handleBotAdd(bot)}>
+        <div key={bot.id} className="bot-card" onClick={() => handleViewDetails(bot)}>
           <img src={bot.avatar_url} alt={bot.name} />
           <li>{bot.name}</li>
           <p>Health: {bot.health}</p>
