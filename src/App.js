@@ -4,6 +4,7 @@ import YourBotArmy from './YourBotArmy';
 import BotDetails from './BotDetails';
 import BotsCollection from './BotsCollection';
 
+
 function App() {
   const [Bots, setBots] = useState([]);
   const [addBot, setAddBot] = useState([]);
@@ -56,6 +57,7 @@ function App() {
         <BotDetails viewSpecs={viewSpecs} onEnlistBot={handleBotAdd} onGoBackToList={handleGoBack} />
       ) : (
         <>
+          
           <YourBotArmy addBot={addBot} onRealese={handleRealese} onDelete={handleDelete} />
           <BotsCollection Bots={Bots} addBot={addBot} onViewDetails={handleViewDetails} />
         </>
