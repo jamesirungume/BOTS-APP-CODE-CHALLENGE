@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import YourBotArmy from './YourBotArmy';
 import BotDetails from './BotDetails';
 import BotsCollection from './BotsCollection';
+import FilterByClass from './FilterByClass';
 
 
 function App() {
@@ -56,8 +57,8 @@ function App() {
       {viewSpecs ? (
         <BotDetails viewSpecs={viewSpecs} onEnlistBot={handleBotAdd} onGoBackToList={handleGoBack} />
       ) : (
-        <>
-          
+        <> 
+          <FilterByClass />
           <YourBotArmy addBot={addBot} onRealese={handleRealese} onDelete={handleDelete} />
           <BotsCollection Bots={Bots} addBot={addBot} onViewDetails={handleViewDetails} />
         </>
