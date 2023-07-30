@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './App.css';
 
 function FilterByClass({ onClassChange }) {
   const [selectClasse, setSelectedClassse] = useState([]);
@@ -21,7 +22,7 @@ function FilterByClass({ onClassChange }) {
   }
 
   return (
-    <div>
+    <div style={{ display:"flex", justifyContent:"center",gap:"40px",fontSize:"large",backgroundColor:"#CBD4C2",height:"29px" }}>
       {classes.map((classe) => (
         <label key={classe}>
           <input

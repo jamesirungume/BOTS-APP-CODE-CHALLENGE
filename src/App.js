@@ -65,7 +65,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div id="app">
       {viewSpecs ? (
         <BotDetails
           viewSpecs={viewSpecs}
