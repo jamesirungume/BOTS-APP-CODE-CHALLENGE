@@ -5,12 +5,14 @@ import BotsCollection from "./BotsCollection";
 import FilterByClass from "./FilterByClass";
 
 function App() {
-  const [Bots, setBots] = useState([]);
-  const [addBot, setAddBot] = useState([]);
-  const [viewSpecs, setViewSpecs] = useState(null);
-  const [selectedmyClass, setSelectedmyClasss] = useState([]);
-  const [filteredBots, setFilteredBots] = useState([]);
+  // State variables
+  const [Bots, setBots] = useState([]); // List of all bots fetched from the server
+  const [addBot, setAddBot] = useState([]); // List of bots added to the user's army
+  const [viewSpecs, setViewSpecs] = useState(null); // Bot whose details are currently being viewed
+  const [selectedmyClass, setSelectedmyClasss] = useState([]); // Selected bot class for filtering
+  const [filteredBots, setFilteredBots] = useState([]); // List of bots filtered by the selected class
 
+  // Fetch bots data from the server on component mount
   useEffect(() => {
     fetch("http://localhost:3000/bots")
       .then((resp) => resp.json())
@@ -22,6 +24,7 @@ function App() {
       });
   }, []);
 
+  // Filter bots based on selected bot class
   useEffect(() => {
     setFilteredBots(
       Bots.filter((bot) => {
@@ -31,18 +34,22 @@ function App() {
     );
   }, [selectedmyClass, Bots]);
 
+  // Function to handle bot class filtering
   function handlefilterClass(classe) {
     setSelectedmyClasss(classe);
   }
 
+  // Function to go back from bot details view to the main list view
   function handleGoBack() {
     setViewSpecs(null);
   }
 
+  // Function to view details of a specific bot
   function handleViewDetails(bot) {
     setViewSpecs(bot);
   }
 
+  // Function to add a bot to the user's army
   function handleBotAdd(bot) {
     const findBot = addBot.find((Bot) => Bot.id === bot.id);
     if (!findBot) {
@@ -52,10 +59,12 @@ function App() {
     }
   }
 
+  // Function to release a bot from the user's army
   function handleRealese(bot) {
     setAddBot((addBot) => addBot.filter((armybot) => armybot.id !== bot.id));
   }
 
+  // Function to delete a bot from the server
   function handleDelete(bot) {
     fetch(`http://localhost:3000/bots/${bot.id}`, {
       method: "DELETE",
@@ -66,6 +75,7 @@ function App() {
 
   return (
     <div id="app">
+      {/* If a specific bot's details are being viewed, show the details view */}
       {viewSpecs ? (
         <BotDetails
           viewSpecs={viewSpecs}
@@ -73,6 +83,7 @@ function App() {
           onGoBackToList={handleGoBack}
         />
       ) : (
+        /* Otherwise, show the main list view */
         <>
           <FilterByClass onClassChange={handlefilterClass} />
           <YourBotArmy
